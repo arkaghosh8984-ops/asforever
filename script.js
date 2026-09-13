@@ -787,6 +787,10 @@ function changeMemory() {
             memories.length;
 
 
+        /*
+           Start fading out first.
+        */
+
         memoryImage.style.opacity =
             "0";
 
@@ -794,11 +798,24 @@ function changeMemory() {
             "scale(.98)";
 
 
+        /*
+           Change the picture almost immediately
+           so there is no noticeable delay.
+        */
+
         setTimeout(function() {
 
             memoryImage.src =
                 memories[memoryIndex];
 
+        }, 100);
+
+
+        /*
+           Fade the new picture in.
+        */
+
+        setTimeout(function() {
 
             memoryImage.style.opacity =
                 "1";
@@ -806,7 +823,7 @@ function changeMemory() {
             memoryImage.style.transform =
                 "scale(1)";
 
-        }, 300);
+        }, 120);
     }
 }
 
