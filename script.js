@@ -75,11 +75,11 @@ function startBackgroundMusic() {
     if (!bgAudioVideo) return;
 
     /*
-       Start the MP4 from 40 seconds.
+       Start the audio from 36 seconds.
        Only the audio is intended to be heard.
     */
 
-    bgAudioVideo.currentTime = 40;
+    bgAudioVideo.currentTime = 36;
 
     const playPromise =
         bgAudioVideo.play();
@@ -110,7 +110,7 @@ if (bgAudioVideo) {
         "ended",
         function() {
 
-            bgAudioVideo.currentTime = 40;
+            bgAudioVideo.currentTime = 36;
 
             const playPromise =
                 bgAudioVideo.play();
