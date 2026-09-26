@@ -78,7 +78,8 @@ function startBackgroundMusic() {
        Start the audio from 36 seconds.
        Only the audio is intended to be heard.
     */
-bgAudioVideo.currentTime = 72;
+
+    bgAudioVideo.currentTime = 72;
 
     const playPromise =
         bgAudioVideo.play();
