@@ -830,7 +830,7 @@ function changeMemory() {
 
 setInterval(
     changeMemory,
-    2500
+    1750
 );
 
 
