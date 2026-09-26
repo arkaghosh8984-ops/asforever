@@ -77,10 +77,12 @@ function startBackgroundMusic() {
 
     if (!bgAudioVideo) return;
 
+
     /*
-       Start from 72 seconds ONLY the first time.
-       After that, keep the music playing from
-       its current position.
+       Set 72 seconds ONLY the first time
+       the music is started from the gift.
+
+       After that, NEVER change currentTime.
     */
 
     if (!musicStarted) {
@@ -92,8 +94,10 @@ function startBackgroundMusic() {
 
 
     /*
-       If music is already playing,
-       do absolutely nothing.
+       If the music is already playing,
+       do nothing.
+
+       This keeps the exact current position.
     */
 
     if (!bgAudioVideo.paused) return;
@@ -116,34 +120,6 @@ function startBackgroundMusic() {
             */
         });
     }
-}
-
-
-/* =====================================================
-   RESTART MUSIC WHEN VIDEO ENDS
-   ===================================================== */
-
-if (bgAudioVideo) {
-
-    bgAudioVideo.addEventListener(
-        "ended",
-        function() {
-
-            bgAudioVideo.currentTime = 72;
-
-            const playPromise =
-                bgAudioVideo.play();
-
-            if (
-                playPromise &&
-                typeof playPromise.catch ===
-                    "function"
-            ) {
-
-                playPromise.catch(function() {});
-            }
-        }
-    );
 }
 
 
