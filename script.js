@@ -109,7 +109,7 @@ if (bgAudioVideo) {
         "ended",
         function() {
 
-            bgAudioVideo.currentTime = 36;
+            bgAudioVideo.currentTime = 72;
 
             const playPromise =
                 bgAudioVideo.play();
