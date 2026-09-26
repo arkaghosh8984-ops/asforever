@@ -70,56 +70,51 @@ const bgAudioVideo =
     document.getElementById("bgAudioVideo");
 
 
+let musicStarted = false;
+
+
 function startBackgroundMusic() {
 
     if (!bgAudioVideo) return;
 
     /*
-       Start the audio from 72 seconds.
-       Only the audio is intended to be heard.
+       Start from 72 seconds ONLY the first time.
+       After that, keep the music playing from
+       its current position.
     */
 
-    function playFromStartPoint() {
+    if (!musicStarted) {
 
         bgAudioVideo.currentTime = 72;
 
-        const playPromise =
-            bgAudioVideo.play();
-
-        if (
-            playPromise &&
-            typeof playPromise.catch === "function"
-        ) {
-
-            playPromise.catch(function() {
-                /*
-                   Browser autoplay protection.
-                   The next user interaction will
-                   try again.
-                */
-            });
-        }
+        musicStarted = true;
     }
 
 
     /*
-       Make sure the audio metadata is loaded
-       before setting the exact start position.
+       If music is already playing,
+       do absolutely nothing.
     */
 
-    if (bgAudioVideo.readyState >= 1) {
+    if (!bgAudioVideo.paused) return;
 
-        playFromStartPoint();
 
-    } else {
+    const playPromise =
+        bgAudioVideo.play();
 
-        bgAudioVideo.addEventListener(
-            "loadedmetadata",
-            playFromStartPoint,
-            {
-                once: true
-            }
-        );
+    if (
+        playPromise &&
+        typeof playPromise.catch ===
+            "function"
+    ) {
+
+        playPromise.catch(function() {
+            /*
+               Browser autoplay protection.
+               The next user interaction will
+               try again.
+            */
+        });
     }
 }
 
